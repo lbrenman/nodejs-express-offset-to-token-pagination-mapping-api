@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
+const { json } = require('express/lib/response');
 const app = express();
 const PORT = 4000;
 
@@ -37,6 +38,8 @@ app.get('/fdx-items', async (req, res) => {
         }
       });
 
+      console.log(`Back end call made with pageToken = ${pageToken}`);
+
       if (!response.data.nextPageToken) {
         return res.status(416).json({ error: 'Offset exceeds data bounds' });
       }
@@ -56,6 +59,10 @@ app.get('/fdx-items', async (req, res) => {
     const upstreamItems = finalPage.data.items || [];
     const sliceStart = offset - currentOffset;
     const slicedItems = upstreamItems.slice(sliceStart, sliceStart + limit);
+
+    const slicedItemsJSON = JSON.stringify(slicedItems);
+
+    console.log(`Final back end call made with pageToken = ${pageToken} returned ${slicedItemsJSON}`);
 
     res.json({
       limit,
