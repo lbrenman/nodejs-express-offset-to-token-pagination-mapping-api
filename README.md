@@ -6,6 +6,14 @@ Leverages the [Mock API For Token Pagination Testing](https://github.com/lbrenma
 
 * Clone Repo
 * Run `npm install`
+* Add .env file
+  ```bash
+  API_KEY=
+  UPSTREAM_API_KEY=
+  UPSTREAM_API_URL=
+  DEFAULT_LIMIT=
+  DEFAULT_OFFSET=
+  ```
 * Run `npm start`
 * Make calls to the API
 
